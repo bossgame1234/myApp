@@ -1,0 +1,16 @@
+<ion-view view-title="Plant">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="plant in plants" type="item-text-wrap" ui-sref="showPlant/{{farm.id}}">
+                <h2>{{plant.name}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-stable button-icon" ui-sref="app.editPlant({id :{{plant.id}}})" style="padding: 0 1rem;">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-click="deletePlant(plant.id)" style="padding: 0 1rem;">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

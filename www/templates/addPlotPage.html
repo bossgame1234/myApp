@@ -1,0 +1,21 @@
+<ion-view view-title="{{head}}">
+    <ion-content  ng-class="{expanded:$scope.isExpanded}" class="im-wrapper">
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Plot Information</h4>
+        <form class="form-horizontal style-form" name="editplot" novalidate>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Plot name</span>
+                <input type="text" placeholder="Plot name*" name="plotName" ng-model="plot.name" required>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Description</span>
+                <textarea  type="textarea" placeholder="Description" ng-model="plot.description"></textarea>
+            </label>
+            <label class="item item-input item-select">
+                <span class="input-label">Plot create</span>
+                <input type="date" placeholder="Plot Create" ng-model="plot.DOB" >
+            </label>
+            <button type="submit" class="button  button-block  button-calm ink" ng-click="addPlot()" ng-show="addPlot" ng-disabled="editplot.plotName.$error.required">Add New Plot</button>
+            <button type="submit" class="button  button-block  button-calm ink" ng-click="editPlot()" ng-show="editPlot" ng-disabled="editplot.plotName.$error.required">Update Plot</button>
+        </form>
+    </ion-content>
+</ion-view>

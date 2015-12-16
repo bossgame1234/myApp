@@ -1,0 +1,18 @@
+<ion-view view-title="Task List" >
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+<ion-list>
+    <ion-item class="item-remove-animate item-icon-right" ng-repeat="task in tasks" type="item-text-wrap">
+        <h2>{{task.description}}
+            <i class="icon ion-chevron-right icon-accessory"></i></h2>
+        <span ng-class="{'label-success' : task.status=='Done','label-danger' : task.status=='Late'||task.status=='Late done','label-warning': task.status=='Working',
+                            'label-info': task.status=='Remaining'}" class="label label-mini label-">{{task.status}}</span>
+        <ion-option-button class="button-stable button-icon" ui-sref="app.editTask({id :{{task.id}}})" style="padding: 0 1rem;">
+            Edit
+        </ion-option-button>
+        <ion-option-button class="button-stable button-icon" ng-click="deleteTask(task.id)" style="padding: 0 1rem;">
+            Delete
+        </ion-option-button>
+    </ion-item>
+</ion-list>
+</ion-content>
+</ion-view>

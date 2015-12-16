@@ -1,0 +1,139 @@
+<ion-view view-title="Activity">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide im-wrapper" >
+<h3  ng-hide="editActivity"><i class="fa fa-angle-right"></i> Add Activity Log </h3>
+        <h3  ng-show="editActivity"><i class="fa fa-angle-right"></i> Edit Activity Log </h3>
+        <form class="form-horizontal style-form" name="act" flow-init novalidate>
+            <ion-list>
+            <label class="item item-input item-select" ng-hide="editActivity">
+                <span class="input-label">Plot</span>
+                <select  ng-show="loadPlot" ng-change="savePlotID(plot_id)" ng-model="plot_id">
+                    <option ng-repeat="plot in plots" value="{{plot.id}}">{{plot.name}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-if="plot_id!=0" ng-hide="editActivity">
+                <span class="input-label">Plant</span>
+                <select ng-if="plot_id!=0"  ng-model="activity.plant_id" ng-options="plant.id as plant.name for plant in plants" >
+                </select>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Date</span>
+                <input type="date" placeholder="MM/dd/yyyy" ng-model="activity.date">
+            </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Time</span>
+                    <input type="time" placeholder="HH:mm:ss" ng-model="activity.time">
+                </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Weather</span>
+                <input type="text" name="weather" placeholder="Weather" ng-model="activity.weather" >
+            </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Description</span>
+                    <textarea rows="7"  class="form-control"  name="description" placeholder="input description here"  ng-model="activity.description"></textarea>
+                </label>
+            <h4>Activity</h4>
+            <div class="col-xs-12">
+                        <div class="col-xs-3">
+                            <a href='' ng-click="tillingCheck()" >
+                                <div ng-show="tillingSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px"  src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/tilling.jpg">
+                                </div>
+                                <div ng-hide="tillingSelected">
+                                    <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/tilling.jpg">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                        <a href='' ng-click="plantingCheck()">
+                            <div ng-show="plantingSelected">
+                                <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/planting.jpg">
+                            </div>
+                            <div ng-hide="plantingSelected">
+                                <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/planting.jpg">
+                            </div>
+                        </a>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href='' ng-click="pruningCheck()" >
+                            <div ng-show="pruningSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/pruning.jpg">
+                            </div>
+                                <div ng-hide="pruningSelected">
+                                    <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/pruning.jpg" >
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                                <a href='' ng-click="harvestingCheck()">
+                                    <div ng-show="harvestingSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/harvesting.jpg">
+                                    </div>
+                                    <div ng-hide="harvestingSelected">
+                                        <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/harvesting.jpg">
+                                    </div>
+                                </a>
+                        </div>
+                </div>
+                <div class="col-xs-12">
+                        <div class="col-xs-3">
+                            <a href='' ng-click="fertilizingCheck()">
+                                <div ng-show="fertilizingSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/fertilizing.jpg">
+                                </div>
+                                <div ng-hide="fertilizingSelected">
+                                    <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/fertilizing.jpg">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href='' ng-click="wateringCheck()">
+                                <div ng-show="wateringSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/watering.jpg">
+                                </div>
+                                <div ng-hide="wateringSelected">
+                                    <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/watering.jpg">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-3">
+                            <a href='' ng-click="scoutingCheck()">
+                                <div ng-show="scoutingSelected">
+                                    <img style="border:4px solid green" width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/scouting.jpg">
+                                </div>
+                                <div ng-hide="scoutingSelected">
+                                    <img width="35px" height="35px" src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/scouting.jpg">
+                                </div>
+                            </a>
+                        </div>
+                </div>
+                <h4>Image</h4>
+                <div  flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" class="col-xs-12" >
+
+                        <div class="thumbnail" ng-if="!activity.pictureDist" ng-show="!$flow.files.length">
+                            <img width="200px" height="100px" class="img-thumbnail" src="img/noimage.png" />
+                        </div>
+                    <div class="thumbnail" ng-if="activity.pictureDist"  ng-show="!$flow.files.length">
+                        <img width="200px" height="100px" class="img-thumbnail" src="{{activity.pictureDist}}" />
+                    </div>
+                    <div class="thumbnail" ng-show="$flow.files.length">
+                        <img width="200px" height="100px" class="img-thumbnail" flow-img="$flow.files[0]" />
+                    </div>
+                        <div class="col-md-8">
+                        <p>
+                            Only PNG,GIF,JPG,JEPG files allowed.
+                        </p></div>
+                    <div   style="margin-bottom: 10px">
+                        <span class="button button-bar button-positive" ng-show="!$flow.files.length" flow-btn>Select image</span>
+                        <span class="button button-calm" ng-show="$flow.files.length" flow-btn>Change</span>
+                             <span class="button button-assertive" ng-show="$flow.files.length" ng-click="$flow.cancel()">
+                                 Remove
+                              </span>
+                    </div>
+                    </div>
+
+                <button ng-show="editActivity" type="submit" class="button button-block button-calm ink" ng-click="editActivity($flow)">EDIT ACTIVITY</button>
+                <button ng-hide="editActivity" type="submit" class="button button-block button-calm ink" ng-click="addActivity($flow)">ADD ACTIVITY</button>
+            </ion-list>
+            </form>
+</ion-content>
+    </ion-view>

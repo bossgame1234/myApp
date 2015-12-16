@@ -1,0 +1,41 @@
+<ion-view view-title="task">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in" >
+        <select  class="form-control" ng-model="search.$" ng-change="remotion()">
+            <option value="tilling">Tilling</option>
+            <option value="planting">Planting</option>
+            <option value="pruning">Pruning</option>
+            <option value="harvesting">Harvesting</option>
+            <option value="fertilizing">Fertilizing</option>
+            <option value="watering">Watering </option>
+            <option value="scouting">Scouting</option>
+            <option value="" selected>All</option>
+            <option value="{{User.name}}" selected>Me</option>
+            <option value="{{toDay}}" selected>Today</option>
+        </select>
+        <ion-list ng-hide="check">
+            <ion-item>
+                <label>No task assign</label>
+            </ion-item>
+        </ion-list>
+        <div ng-repeat="task in taskList|filter:search" class="item card-item">
+            <div  class="card stable-bg ink ink-dark" ng-style="task.color">
+                <div class="item item-avatar item-text-wrap" >
+                    <span class="avatar" style="background-image: url('http://projectlinux.cloudapp.net/MS4SF/public/{{task.owner_task.pictureDist}}');"></span><br/>
+                    <strong>{{task.owner_task.name}} {{task.owner_task.lastname}}</strong>
+                    {{task.description}} <strong>at</strong> {{task.plant.plot.name}} --> {{task.plant.name}}
+                    <!--{{task.plant.plot.name}}&ndash;&gt;{{task.name}}-->
+                    <a class="image" ng-if="task.pictureLocation"><img src="http://projectlinux.cloudapp.net/MS4SF/public/{{task.pictureLocation}}">
+                    </a>
+                    <button type="button" class="button button-royal" ng-click="acceptTask(task.id,task.status)" ng-show="task.status=='Remaining'||task.status=='Late'">Accept Task</button>
+                    <a ui-sref="app.editTask({id:{{task.id}}})"><button type="button" class="button button-energized" ng-show="event.status=='Working'">Update Task</button></a> <br/>
+                    <button type="button" class="button button-balanced" ng-click="finishTask(task.id,task.status)" ng-show="task.status=='Working'">Finish Task</button>
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> {{task.date|date :'d/M/yy'}} {{task.time|date :'hh:mm'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+<ion-view view-title="Over All Task" >
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+    <ion-slide>
+        <div class="box blue">
+            <h3>Work progress</h3>
+            <div google-chart chart="chartObject" style="height:400px; width:100%;"></div></div>
+    </ion-slide>
+    <ion-slide>
+        <div class="box yellow">
+            <h3>Most active worker</h3>
+            <div ng-repeat="top in tops">
+                <div class="item item-avatar item-text-wrap">
+                    <img class="avatar" src="http://projectlinux.cloudapp.net/MS4SF/public/{{top.pictureDist}}" width="35px" height="35px" align="">
+                    <h3 class="control-label"><strong>{{$index+1}}</strong> <i class="ion ion-ribbon-a" ng-if="$index=='0'"></i> {{top.name}} {{top.lastname}}</h3><br/>
+                    <p>{{top.count}} done works</p><br/>
+                    </div>
+            </div>
+            <h3>TEAM MEMBERS</h3>
+            <div ng-repeat="member in members">
+                <div class="item item-avatar item-text-wrap">
+                    <img class="avatar" src="http://projectlinux.cloudapp.net/MS4SF/public/{{member.pictureDist}}" width="35px" height="35px" align="">
+                    <p><a href="#viewMemberProfile/{{member.id}}">{{member.name}} {{member.lastname}}</a><br/>
+                        <muted>{{member.role}}</muted>
+                    </p>
+                    </div>
+            </div>
+        </div>
+    </ion-slide>
+    </ion-slide-box>
+    </ion-content>
+</ion-view>

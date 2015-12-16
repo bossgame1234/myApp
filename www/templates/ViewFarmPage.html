@@ -1,0 +1,55 @@
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> {{farm.name}}</h3><a href="#/showFarmList"><button class="btn btn-default btn-primary">Back</button></a>
+                <div class="row centered">
+                    <ui-gmap-google-map
+                                        center="map.center"
+                                        zoom="map.zoom"
+                                        dragging="map.dragging"
+                                        bounds="map.bounds"
+                                        events="map.events"
+                                        options="map.options"
+                                        pan="true"
+                                        control="map.control"
+                                        >
+                        <!--to add as a map control -->
+                        <ui-gmap-marker coords="marker.coords"  idkey="marker.id">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                </div>
+                <div class="row data">
+                    <div class="col-sm-6 col-xs-6 goleft">
+                        <h2>Description</h2>
+                        <br>
+                        <h4>{{farm.description}}</h4>
+                        <br>
+                        <h2>Farm ID </h2>
+                        <br>
+                        <h4>{{encoding}}</h4>
+                    </div>
+                    <div class="col-sm-6 col-xs-6 goright">
+                        <h2>Address</h2>
+                        <br>
+                        <h4>{{farm.address}}</h4>
+                    </div>
+                </div>
+        <h3><i class="fa fa-angle-right"></i> Plot List</h3>
+        <!-- Table -->
+        <div ng-controller="listPlotController">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th >Name</th>
+                <th >Description</th>
+                <th >Date of create</th>
+            </tr>
+            <tr ng-repeat="plot in plots">
+                <td>{{$index+1}}</td>
+                <td><a ng-href="#/viewPlot/{{plot.id}}">{{plot.name}}</a></td>
+                <td>{{plot.description}}</td>
+                <td>{{plot.DOB}}</td>
+            </tr>
+        </table>
+        </div>
+    </section>
+</section>

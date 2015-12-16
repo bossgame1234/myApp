@@ -1,0 +1,30 @@
+<ion-view view-title="Monitor select">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <form class="list" name="register" novalidate flow-init>
+            <ion-list>
+                <label class="item item-input item-select">
+                    <span class="input-label">Select Farm</span>
+                    <select  ng-change="saveFarmID(farm_id,farm.name)" ng-model="farm_id">
+                        <option selected></option>
+                        <option ng-repeat="farm in farms" value="{{farm.id}}" >{{farm.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Select Plot</span>
+                    <select   ng-change="savePlotID(plot_id,plot.name)"  ng-model="plot_id">
+                        <option selected></option>
+                        <option ng-repeat="plot in plots" value="{{plot.id}}">{{plot.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Select Device</span>
+                    <select  ng-change="saveDeviceID(device_id)"  ng-model="device_id">
+                        <option  selected></option>
+                        <option ng-repeat="device in devices" value="{{device.id}}">{{device.device_id}}</option>
+                    </select>
+                </label>
+            </ion-list>
+            <button class="button button-block button-calm ink " data-ink-opacity="1" data-ink-color="#9DEAFF" ng-click="monitor()" >Monitor</button>
+        </form>
+    </ion-content>
+</ion-view>

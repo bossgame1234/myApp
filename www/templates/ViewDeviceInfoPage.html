@@ -1,0 +1,49 @@
+<ion-view view-title="Monitor select">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+            <label class="item item-input item-select">
+        <span class="input-label" >Select Monitor</span>
+            <select  ng-model="factor" >
+                <option value="temperature">temperature</option>
+                <option value="light">light</option>
+                <option value="humidity">air humidity</option>
+                <option value="soilmoisture">soil moisture</option>
+            </select>
+                </label>
+        <ion-list ng-show="factor=='light'">
+            <ion-item  class="item-divider">Light</ion-item>
+            <ion-item >Max : {{light.lightMax|number:2}} lux.</ion-item>
+            <ion-item >Average : {{light.lightAverage|number:2}} lux.</ion-item>
+            <ion-item >Min : {{light.lightMin|number:2}} lux.</ion-item>
+            <ion-item >10 Minute ago : {{current[0].luxValue|number:2}} lux.</ion-item>
+            <button type="submit" class="button-bar" ng-click="showLight()">Show Light graph</button>
+        </ion-list>
+        <ion-list ng-show="factor=='temperature'">
+            <ion-item  class="item-divider">Temperature</ion-item>
+            <ion-item >Max : {{temperature.tempMax|number:2}} celsius.</ion-item>
+            <ion-item >Average : {{temperature.tempAverage|number:2}} celsius.</ion-item>
+            <ion-item >Min : {{temperature.tempMin|number:2}} celsius.</ion-item>
+            <ion-item >10 Minute ago : {{current[1].celsiusValue|number:2}} celsius</ion-item>
+            <button type="submit" class="button-bar" ng-click="showTemperature()">Show Temperature graph</button>
+        </ion-list>
+        <ion-list ng-show="factor=='humidity'">
+            <ion-item  class="item-divider">Humidity</ion-item>
+            <ion-item >Max : {{humidity.humidityMax|number:2}} %</ion-item>
+            <ion-item >Average : {{humidity.humidityAverage|number:2}} %</ion-item>
+            <ion-item >Min : {{humidity.humidityMin|number:2}} %</ion-item>
+            <ion-item >10 Minute ago : {{current[2].humidityPercentage|number:2}} %</ion-item>
+            <button type="submit" class="button-bar" ng-click="showHumidity()">Show Air humidity graph</button>
+        </ion-list>
+        <ion-list ng-show="factor=='soilmoisture'">
+            <ion-item  class="item-divider">Temperature</ion-item>
+            <ion-item >Max : {{soilMoisture.soilMax|number:2}}</ion-item>
+            <ion-item >Average : {{soilMoisture.soilAverage|number:2}}</ion-item>
+            <ion-item >Min : {{soilMoisture.soilMin|number:2}}</ion-item>
+            <ion-item >10 Minute ago : {{current[3].soilValue|number:2}}</ion-item>
+            <button type="submit" class="button-bar" ng-click="showSoilMoisture()">Show Soil moisture graph</button>
+        </ion-list>
+    <div class="col-xs-12" ng-show="lightGraph||humidityGraph||temperatureGraph||soilMoistureGraph">
+        <div google-chart chart="chart" style="{{cssStyle}}"></div>
+        <!-- explicit close of tag seems to be necessary -->
+    </div>
+    </ion-content>
+</ion-view>

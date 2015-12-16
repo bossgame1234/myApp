@@ -1,0 +1,37 @@
+<ion-view view-title="Weather forecast" >
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="weather-2 pn" ng-if="Latitude&&Longitude" style="height: 910px">
+            <div class="weather-2-header  ">
+            <div class="row centered">
+                <div class="col-sm-12 col-xs-12">
+                     <h2 style="color: white"> {{weather.sys.country}}</h2>
+                </div>
+            </div>
+            </div>
+                <div class="content ">
+                    <img src="http://projectlinux.cloudapp.net/MS4SF/public/assets/img/bangkok_city.jpg" class="img-circle" align="center" height="200px" width="200px">
+                </div>
+    <div class="row data">
+    <div class="col-xs-12">
+        <h4><b>Current Temperature : {{weather.main.temp-274|number : 2}} ºC</b></h4>
+        <h6>Max Temperature : {{weather.main.temp_max-274|number : 2}}ºC max</h6>
+        <h6>Min Temperature : {{weather.main.temp_min-274|number : 2}}ºC min</h6>
+        <h6>Pressure : {{weather.main.pressure}}</h6>
+        <h6>Humidity : {{weather.main.humidity}} %</h6>
+    </div>
+    <div class="col-xs-12">
+        <h5><img ng-src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"> </h5>
+        <h6><b>Status : {{weather.weather[0].main}}</b></h6>
+        <h6><b>Desctription : {{weather.weather[0].description}}</b></h6>
+        <h6><b>Wind Speed: {{weather.wind.speed}} m/s</b></h6>
+        <h6><b>Wind Direction: {{weather.wind.deg}} º</b></h6>
+    </div>
+    </div>
+            </div>
+        <div ng-if="!(Latitude&&Longitude)" >
+            <h3 style="color: ">
+                <a href="#editFarm/{{FarmId}}" >Click here </a>to locate your farm
+            </h3></div>
+        </div>
+</ion-content>
+</ion-view>

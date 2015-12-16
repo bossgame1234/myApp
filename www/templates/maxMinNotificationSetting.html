@@ -1,0 +1,78 @@
+<ion-view view-title="Monitor device setting">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <ion-list>
+            <label class="item item-input item-select" ng-hide="hideSelect">
+                <span class="input-label">Select Plot</span>
+                <select  ng-change="savePlotID(plot_id)" ng-model="plot_id">
+                    <option selected></option>
+                    <option ng-repeat="plot in plots" value="{{plot.id}}" >{{plot.name}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-hide="hideSelect">
+                <span class="input-label">Select Plant</span>
+                <select  ng-model="notificationDevice.plant_id">
+                    <option selected></option>
+                    <option ng-repeat="plant in plants" value="{{plant.id}}">{{plant.name}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select" ng-hide="hideSelect">
+                <span class="input-label">Select Device</span>
+                <select  ng-change="saveDeviceID(device_id)"  ng-model="device_id">
+                    <option  selected></option>
+                    <option ng-repeat="device in devices" value="{{device.device_id}}">{{device.device_id}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+            <span class="input-label" >Select Monitor Setting</span>
+            <select  ng-model="factor" >
+                <option value="temperature">temperature</option>
+                <option value="light">light</option>
+                <option value="humidity">air humidity</option>
+                <option value="soilmoisture">soil moisture</option>
+            </select>
+            </label>
+        </ion-list>
+        <ion-list ng-show="factor=='light'">
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Max Light</span>
+                <input type="number" string-to-number placeholder="Max Light(Lux)" ng-model="notificationDevice.maxLux" required>
+            </label>
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Min Light</span>
+                <input type="number"  string-to-number placeholder="Min Light(Lux)" ng-model="notificationDevice.minLux" required>
+            </label>
+        </ion-list>
+        <ion-list ng-show="factor=='temperature'">
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Max Temperature</span>
+                <input type="number" string-to-number placeholder="Max Temperature(Celsius)" ng-model="notificationDevice.maxCelsius" required>
+            </label>
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Min Temperature</span>
+                <input type="number" string-to-number placeholder="Min Temperature(Celsius)" ng-model="notificationDevice.minCelsius" required>
+            </label>
+        </ion-list>
+        <ion-list ng-show="factor=='humidity'">
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Max Humidity</span>
+                <input type="number"  string-to-number placeholder="Max Humidity(%)" ng-model="notificationDevice.maxHumidityPercentage" required>
+            </label>
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Min Humidity</span>
+                <input type="number" string-to-number placeholder="Min Humidity(%)" ng-model="notificationDevice.minHumidityPercentage" required>
+            </label>
+        </ion-list>
+        <ion-list ng-show="factor=='soilmoisture'">
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Max soil moisture</span>
+                <input type="number" string-to-number  placeholder="Max Soil moisture" ng-model="notificationDevice.maxSoilMoisture" required>
+            </label>
+            <label class="item item-input  item-floating-label">
+                <span class="input-label">Min soil moisture</span>
+                <input type="number" string-to-number  placeholder="Min Soil moisture" ng-model="notificationDevice.minSoilMoisture" required>
+            </label>
+        </ion-list>
+        <button class="button button-block button-assertive ink " data-ink-opacity="1" data-ink-color="#9DEAFF" ng-click="refresh()" ng-show="hideSelect" ng-hide="editMode" >RESELECT</button>
+        <button class="button button-block button-calm ink " data-ink-opacity="1" data-ink-color="#9DEAFF" ng-click="updateMonitor()" >APPLY</button>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,72 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-balanced" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="fabContent"></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="right">
+        <ion-header-bar class="dark-bg expanded" >
+            <a ui-sref="app.myProfile"><span ng-show="UserIdentify" class="avatar" style="background-image: url('http://projectlinux.cloudapp.net/MS4SF/public/{{User.pictureDist}}'); background-size: cover;"></span></a>
+            <h2 ng-show="UserIdentify" style="margin-top: 80px">{{User.name}} {{User.lastname}}</h2>
+            <h2 ng-hide="UserIdentify">MS4SF</h2>
+        </ion-header-bar>
+        <ion-content class=" has-expanded-header">
+            <ion-list>
+
+                <ion-item nav-clear menu-close ui-sref="app.login" ng-hide="UserIdentify">
+                    Log in
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.register" ng-hide="UserIdentify">
+                    Register
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.farmList" ng-show="UserIdentify">
+                    Farm <label ng-show="UserIdentify&&SelectedFarm">--> {{FarmName}}</label>
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.plotList" ng-show="UserIdentify&&SelectedFarm">
+                    Plot  <label ng-show="UserIdentify&&SelectedPlot">--> {{PlotName}}</label>
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.plantList" ng-show="UserIdentify&&SelectedPlot">
+                    View Plant
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.deviceList" ng-show="UserIdentify&&SelectedPlot">
+                    Select Device <label ng-show="UserIdentify&&SelectedDevice">--> selected</label>
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.notification" ng-show="UserIdentify&&SelectedFarm">
+                    Notification
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.weather" ng-show="UserIdentify&&SelectedFarm">
+                    Weather Forecast
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.assign" ng-show="User.role=='farmer'&&UserIdentify&&SelectedFarm">
+                    Assign work
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.work" ng-show="User.role=='farm worker'&&UserIdentify&&SelectedFarm">
+                    View work
+                </ion-item>
+                <ion-item nav-clear menu-close ng-controller="logoutController" ng-click="logout()" ng-show="UserIdentify">
+                   Logout
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+<ion-footer-bar class="tabs-striped bar-footer tabs-color-assertive tabs-icon-left" ng-show="UserIdentify">
+    <div class="tabs" >
+        <a class="tab-item" ui-sref="app.fastMonitor" data-ink-color="#ef473a" data-ink-opacity=".35">
+            <i class="icon ion-home"></i> Monitoring
+        </a>
+        <a class="tab-item" ui-sref="app.activityTimeline" data-ink-color="#ef473a" data-ink-opacity=".35">
+            <i class="icon ion-star"></i> Activity
+        </a>
+        <a class="tab-item" data-ink-color="#ef473a" data-ink-opacity=".35" ui-sref="app.myProfile">
+            <i class="icon ion-gear-a"></i> My profile
+        </a>
+    </div>
+</ion-footer-bar>

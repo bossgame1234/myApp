@@ -1,0 +1,38 @@
+<ion-view view-title="Activity">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in" >
+        <select  class="form-control" ng-model="search.$" ng-change="remotion()">
+            <option value="tilling">Tilling</option>
+            <option value="planting">Planting</option>
+            <option value="pruning">Pruning</option>
+            <option value="harvesting">Harvesting</option>
+            <option value="fertilizing">Fertilizing</option>
+            <option value="watering">Watering </option>
+            <option value="scouting">Scouting</option>
+            <option value="" selected>All</option>
+            <option value="{{User.name}}" selected>Me</option>
+            <option value="{{toDay}}" selected>Today</option>
+        </select>
+        <ion-list ng-show="showError">
+            <ion-item>
+                <label>Please select farm before view activity</label>
+            </ion-item>
+        </ion-list>
+        <div ng-repeat="activity in activities|filter:search" class="item card-item">
+            <div  class="card stable-bg ink ink-dark">
+                <div class="item item-avatar item-text-wrap">
+                    <span class="avatar" style="background-image: url('http://projectlinux.cloudapp.net/MS4SF/public/{{activity.user[0].pictureDist}}');"></span><br/>
+                    <strong>{{activity.user[0].name}} {{activity.user[0].lastname}}</strong>
+                    {{activity.description}} <strong>at</strong> {{activity.plant.plot.name}} --> {{activity.plant.name}}
+                    <!--{{activity.plant.plot.name}}&ndash;&gt;{{activity.name}}-->
+                    <a class="image" ng-if="activity.pictureDist"><img src="http://projectlinux.cloudapp.net/MS4SF/public/{{activity.pictureDist}}">
+                    </a>
+                    <div class="card-footer text-right">
+                        <div class="pull-left">
+                            <i class="icon ion-clock"></i> {{activity.date|date :'d/M/yy'}} {{activity.time|date :'hh:mm'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

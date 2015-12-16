@@ -1,0 +1,22 @@
+<ion-view view-title="My Profile">
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-color: #83d0f4;height: 200px">
+            <div class="content ">
+                <div class="avatar" style="background-image: url('http://projectlinux.cloudapp.net/MS4SF/public/{{member.pictureDist}}');"></div>
+                <h3><a class="light">{{member.name}} {{member.lastname}}</a></h3>
+                <h4>{{member.role}}</h4>
+            </div>
+        </div>
+        <h4 class="content padding double-padding-x">My information <a ui-sref="app.editProfile"><span class="ion-edit"></span></a></h4>
+        <div class="list animate-fade-slide-in-right">
+            <div  class="item">
+                <h2>Name </h2>
+                <p>{{member.name}} {{member.lastname}}</p>
+                <h2>Telephone</h2>
+                <p>{{member.phoneNumber}}</p>
+                <h2>Email</h2>
+                <p>{{member.email}}</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
