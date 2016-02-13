@@ -1,0 +1,72 @@
+<ion-view view-title="{{head}}">
+    <ion-content ng-class="{expanded:$scope.isExpanded}" class="im-wrapper">
+        <form class="list" name="register" novalidate flow-init>
+            <ion-list>
+                <h1 ng-hide="editMode">Register</h1>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder="Username" ng-model="registerUser.username" required>
+                </label>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Password</span>
+                    <input type="text" placeholder="Password : 6-12 characters" ng-minlength="6" maxlength="12"  ng-model="registerUser.password" required>
+                </label>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Name</span>
+                    <input type="text" placeholder="First Name"  ng-model="registerUser.name" required>
+                </label>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Lastname </span>
+                    <input type="text" placeholder="Last Name"  ng-model="registerUser.lastname" required>
+                </label>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Email </span>
+                    <input type="email" placeholder="Email"  ng-model="registerUser.email" >
+                </label>
+                <label class="item item-input  item-floating-label">
+                    <span class="input-label">Phone no.</span>
+                    <input type="tel" placeholder="Telephone Number"  ng-pattern="/^[0-9]*$/" maxlength="10" ng-minlength="9"  name="phoneNumber" ng-model="registerUser.phoneNumber" required >
+                </label>
+                <label class="item item-input item-select">
+                <span class="input-label">Role</span>
+                <select ng-model="registerUser.role" required style="position: inherit">
+                    <option value="farmer" selected="">Farm Owner</option>
+                    <option value="farm worker">Farm Worker</option>
+                </select>
+            </label>
+            <label class="item item-input" ng-show="registerUser.role=='farm worker'">
+                <span class="input-label">Farm ID</span>
+                <input type="email" placeholder=""  ng-model="registerUser.farmID" required >
+            </label>
+            <div flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]">
+                    <div style="margin-bottom: 10px" ng-if="registerUser.pictureDist"  class="thumbnail" ng-show="!$flow.files.length">
+                        <img width="200px" height="100px" class="img-thumbnail" src="http://projectlinux.cloudapp.net/MS4SF/public/{{registerUser.pictureDist}}" />
+                    </div>
+                    <div style="margin-bottom: 10px" ng-if="!registerUser.pictureDist" class="thumbnail" ng-show="!$flow.files.length">
+                        <img width="200px" height="100px" class="img-thumbnail"  src="img/noimage.png" />
+                    </div>
+                    <div  style="margin-bottom: 10px" class="thumbnail" ng-show="$flow.files.length">
+                        <img width="200px" height="100px" class="img-thumbnail"  flow-img="$flow.files[0]"/>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            Only PNG,GIF,JPG,JEPG files allowed.
+                        </p>
+                    </div>
+                    <div style="margin-bottom: 10px">
+                        <span class="button button-bar button-positive " ng-show="!$flow.files.length" flow-btn>Select image</span>
+                        <span class="button button-calm" ng-show="$flow.files.length"  flow-btn>Change</span>
+                             <span class="button button-assertive" ng-show="$flow.files.length" ng-click="$flow.cancel()">
+                                 Remove
+                              </span>
+                    </div>
+            </div>
+            </ion-list>
+            <ion-list>
+            <button class="button  button-calm ink " data-ink-opacity="1" data-ink-color="#9DEAFF" ng-hide="editMode" ng-click="Register($flow)" >Sign up</button>
+            <button class="button button-block button-calm ink " data-ink-opacity="1" data-ink-color="#9DEAFF" ng-show="editMode" ng-click="Edit($flow)" >Edit</button>
+            </ion-list>
+        </form>
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,55 @@
+<ion-view view-title="Sensing Device">
+    <ion-content>
+        <ion-list>
+            <form name="generateCodeForm" >
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Device ID</span>
+                    <input type="text" placeholder="Device ID" name="plantName" ng-model="deviceP.device_id" maxlength="10">
+                </label>
+                <button type="submit" class="button  button-block  button-calm ink"  ng-click="addDevice()">Add device</button>
+            </form>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="device in devices" type="item-text-wrap">
+                <h2>{{device.device_id}}</h2>
+                <p>install at {{device.updated_at}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-stable button-icon" ng-click="selectDevice(device.id,device.device_id)" style="padding: 0 1rem;">
+                    Pin
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-show="User.role == 'farmer'" ng-click="deleteDevice(device.id)" style="padding: 0 1rem;">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+<section id="main-content">
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Sensing device ID list</h3>
+        <!-- Table -->
+        <div class="row" ng-show="SelectedPlot&&User.role == 'farmer'">
+        <form name="generateCodeForm" >
+            <div class="col-sm-2"><h4>Device ID </h4> </div>
+            <div class="col-sm-4"><input ng-model="deviceP.device_id" type="text" id="deviceId" name="deviceId" maxlength="10" class="form-control" ></div>
+            <div class="col-sm-1"><button type="submit" class="btn btn-default"  ng-click="addDevice()">Submit</button></div>
+        </form>
+    </div>
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Device Id</th>
+                <th>Registered at</th>
+                <th ng-show="User.role == 'farmer'">Delete</th>
+                <th>Select</th>
+            </tr>
+            <tr ng-repeat="device in devices">
+                <td>{{$index+1}}</td>
+                <td><a href="#/viewDailySummary/{{device.id}}">{{device.device_id}}</a></td>
+                <td>{{device.updated_at}}</td>
+                <td ng-show="User.role == 'farmer'"><a href="#/sensingDeviceList" ng-click="deleteDevice(device.id)"><button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a></td>
+                <td><a href="#/sensingDeviceList" ng-click="selectDevice(device.id,device.device_id)"><button class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pushpin" style="color: white" aria-hidden="true"></i></button></a></td>
+                </td>
+            </tr>
+        </table>
+    </section>
+</section>

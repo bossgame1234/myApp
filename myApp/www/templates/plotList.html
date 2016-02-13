@@ -1,0 +1,19 @@
+<ion-view view-title="Plot">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="plot in plots" type="item-text-wrap" ui-sref="showfarm/{{farm.id}}">
+                <h2>{{plot.name}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-stable button-icon" ng-click="selectPlot(plot.id,plot.name)" style="padding: 0 1rem;">
+                    Pin
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-show="User.role == 'farmer'" ui-sref="app.editPlot({id :{{plot.id}}})" style="padding: 0 1rem;">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-show="User.role == 'farmer'" ng-click="deletePlot(plot.id)" style="padding: 0 1rem;">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

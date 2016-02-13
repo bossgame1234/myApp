@@ -1,0 +1,62 @@
+<ion-view view-title="{{head}}" >
+    <ion-content  ng-class="{expanded:$scope.isExpanded}" class="im-wrapper">
+        <!-- BASIC FORM ELELEMNTS -->
+                    <h4 class="mb"><i class="fa fa-angle-right"></i> Farm Information</h4>
+                    <form class="form-horizontal style-form" name="editfarm" novalidate>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Farm name</span>
+                            <input type="text" placeholder="Farm name" name="farmName" ng-model="farm.name" required>
+                        </label>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Description</span>
+                            <textarea  type="textarea" placeholder="Description" ng-model="farm.description"></textarea>
+                        </label>
+                        <label class="item item-input item-floating-label">
+                            <span class="input-label">Address</span>
+                            <textarea  type="textarea" placeholder="Address" ng-model="farm.address"></textarea>
+                        </label>
+
+                        <ion-list>
+                            <label class="item">Position in map</label>
+                            <div class="item item-input item-floating-label col-xs-6">
+                                <input ng-model="farm.latitude"  type="text" id="latitude" name="latitude" placeholder="latitude" >
+                            </div>
+                            <div class="item item-input item-floating-label col-xs-6">
+                                <input ng-model="farm.longitude"  type="text" id="longitude" name="longitude" placeholder="longitude">
+                            </div>
+                        </ion-list>
+                        <button type="submit" class="button  button-block  button-calm ink " ng-click="addFarm()" ng-show="addFarm" ng-disabled="editfarm.farmName.$error.required">Add New Farm</button>
+                        <button type="submit" class="button  button-block  button-calm ink " ng-click="editFarm()" ng-show="editFarm" ng-disabled="editfarm.farmName.$error.required">Update Farm</button>
+
+                        <ui-gmap-google-map
+                                            center="map.center"
+                                            zoom="map.zoom"
+                                            dragging="map.dragging"
+                                            bounds="map.bounds"
+                                            events="map.events"
+                                            options="map.options"
+                                            pan="true"
+                                            control="map.control">
+                            <!--to add as a map control -->
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" ng-show="editFarm" idkey="marker.id">
+                            </ui-gmap-marker>
+                            <!--to add as a map control -->
+                            <ui-gmap-search-box options="searchbox.options" template="searchbox.template"
+                                                events="searchbox.events" position="searchbox.position"></ui-gmap-search-box>
+
+                            <!--to add to a parent div-->
+                            <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+
+
+                            <ui-gmap-markers idkey="map.idkey" models="map.markers" coords="'self'" icon="'icon'"
+                                             click="'onClicked'"></ui-gmap-markers>
+                            <ui-gmap-window coords="selected" idkey="selected.place_id" templateurl="selected.templateurl"
+                                            templateparameter="selected.templateparameter" options="selected.options"
+                                            closeClick='selected.closeClick()' ng-cloak>
+
+                            </ui-gmap-window>
+
+                        </ui-gmap-google-map>
+                    </form>
+</ion-content>
+</ion-view>

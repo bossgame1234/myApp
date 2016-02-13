@@ -1,0 +1,19 @@
+<ion-view view-title="Log in" align-title="left">
+    <ion-content style="background: url('img/768.png') center; background-size: cover;">
+        <div class="hero flat">
+            <div class="content">
+                <p style="font-size: 30px">farm-able</p>
+            </div>
+        </div>
+        <div class="list">
+            <ion-md-input placeholder="Username" hightlightColor="light" class="ink-input-wrapper light " ng-model="auth.username" ></ion-md-input>
+            <ion-md-input placeholder="Password" hightlightColor="light" class="ink-input-wrapper light " type="password" ng-model="auth.password"></ion-md-input>
+        </div>
+        <div class="padding">
+        <button class="button button-full ink"style="background-color: #f4ebda" ng-click="login()">SIGN IN</button>
+            <div class="control-label text-center" style="text-align-all: center">
+             <a ui-sref="app.register" ><h4>Or Register</h4></a>
+            </div>
+        </div>
+        </ion-content>
+</ion-view>

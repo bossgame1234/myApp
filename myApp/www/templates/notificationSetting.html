@@ -1,0 +1,32 @@
+<ion-view view-title="Notification Setting" >
+    <ion-content  ng-class="{expanded:$scope.isExpanded}" class="im-wrapper">
+        <li class="item item-toggle item-remove-animate item-icon-right" ng-hide="User.role=='farmer'" >
+            Task Notification
+            <label class="toggle toggle-balance">
+                <input type="checkbox" ng-model="noticeTask" ng-true-value="'on'" ng-false-value="'off'" ng-change="changeTaskStatus(noticeTask)">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </li>
+        <ion-list>
+            <h5>Sensor Notification</h5>
+            <ion-item class="item item-remove-animate item-icon-right " ng-repeat="notice in noticeList">
+            <h2>{{notice.plant.name}}</h2>
+            <p>id : {{notice.sensor.sensing_device.device_id}}</p>
+                <label class="toggle toggle-assertive icon-accessory icon">
+                    <input type="checkbox" ng-model="notice.pivot.status" ng-true-value="'on'" ng-false-value="'off'" ng-change="changeStatus(notice.id,notice.pivot.status)">
+                    <div class="track">
+                        <div class="handle" style="top: 24px"></div>
+                    </div>
+                </label>
+            <ion-option-button class="button-stable button-icon" ng-show="User.role=='farmer'" ui-sref="app.editNotification({id : {{notice.id}}})" style="padding: 0 1rem;">
+                Edit
+            </ion-option-button>
+            <ion-option-button class="button-stable button-icon" ng-show="User.role=='farmer'" ng-click="deleteNotification(notice.id)" style="padding: 0 1rem;">
+                Delete
+            </ion-option-button>
+        </ion-item>
+    </ion-list>
+</ion-content>
+</ion-view>

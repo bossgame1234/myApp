@@ -1,0 +1,32 @@
+<ion-view view-title="{{head}}">
+    <ion-content  ng-class="{expanded:$scope.isExpanded}" class="im-wrapper">
+        <h4 class="mb"><i class="fa fa-angle-right"></i> Plant Information</h4>
+        <form class="form-horizontal style-form " name="editplant" novalidate >
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Plant name</span>
+                <input type="text" placeholder="Plant name*" name="plantName" ng-model="plant.name"  required>
+            </label>
+            <label class="item item-input item-select">
+                <span class="input-label">Type</span>
+                <select ng-model="plant.type">
+                    <option>Flower</option>
+                    <option>Fruit</option>
+                    <option>Grain Crops</option>
+                    <option>Herb</option>
+                    <option>Tree</option>
+                    <option>Vegetable</option>
+                </select>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Planted Date</span>
+                <input type="date" placeholder="Planted Date*" name="plantDate" ng-model="plant.DOB" required>
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Days till harvest</span>
+                <input type="number" placeholder="Days till harvest*" name="harvestDay" ng-model="plant.harvestDay" required>
+            </label>
+            <button type="submit" class="button  button-block  button-calm ink" ng-click="addPlant()" ng-show="addPlant" ng-disabled="editplant.$error.required">Add New Plant</button>
+            <button type="submit" class="button  button-block  button-calm ink" ng-click="editPlant()" ng-show="editPlant" ng-disabled="editplant.$error.required">Update Plant</button>
+        </form>
+    </ion-content>
+</ion-view>

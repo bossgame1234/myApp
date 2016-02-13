@@ -1,0 +1,19 @@
+<ion-view view-title="Farm" >
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <ion-list>
+            <ion-item class="item-remove-animate item-icon-right" ng-repeat="farm in farms" type="item-text-wrap" ui-sref="showfarm({id:{{farm.id}}})">
+                <h2>{{farm.name}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-stable button-icon" ng-click="selectFarm(farm.id,farm.name)" style="padding: 0 1rem;">
+                    Pin
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-show="User.role=='farmer'" ui-sref="app.editFarm({id :{{farm.id}}})" style="padding: 0 1rem;">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button-stable button-icon" ng-show="User.role=='farmer'" ng-click="deleteFarm(farm.id)" style="padding: 0 1rem;">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
